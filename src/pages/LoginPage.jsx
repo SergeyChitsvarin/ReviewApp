@@ -12,14 +12,24 @@ export default function LoginPage() {
   return (
     //simple UI with user and password fields and error handling on click
     <div className="container d-flex flex-column justify-content-center align-items-center min-vh-100">
-      <h1 className="mb-4">Login</h1>
-      <h3>Username: </h3>
-      <input type="email" placeholder='YourEmail@Mail.com' />
-      <h3>Password: </h3>
-      <input type="password" placeholder='Password' />
-      <button className="btn btn-primary m-3" onClick={handleLogInAttempt}>
-        Log In
-      </button>
+      <div className="border rounded p-4 shadow">
+        <form className='px-4 py-3 d-flex flex-column align-items-center justify-content-center'>
+          <div>
+            <h1 className="mb-4 text-center">Login</h1>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="formUser" className="form-label px-1">Username: </label>
+            <input type="email" placeholder='YourEmail@Mail.com' id="formUser" />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="formPass" className="form-label px-1">Password:  </label>
+            <input type="password" placeholder='Password' id="formPass" />
+          </div>
+          <button className="btn btn-primary m-3" onClick={handleLogInAttempt}>
+            Log In
+          </button>
+        </form>
+      </div>
     </div>
   )
 }
