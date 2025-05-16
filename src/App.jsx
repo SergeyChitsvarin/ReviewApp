@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import LoginPage from './pages/LoginPage'
-import MainPage from './pages/MainPage' 
+import MainPage from './pages/MainPage'
 
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
         <Route path="/browseReviews" element={<MainPage />} />
       </Routes>
     </Router>
-  )
+  );
 }
 
 export default App
