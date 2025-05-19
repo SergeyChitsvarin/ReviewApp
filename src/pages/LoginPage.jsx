@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 export default function LoginPage() {
   const navigate = useNavigate()
@@ -11,9 +11,8 @@ export default function LoginPage() {
   }
 
   return (
-    //simple UI with user and password fields and error handling on click
+    //Web page used for signing in or creating an account to access the rest of the website as a logged in user.
     <>
-      <Header />
       <div className="container d-flex flex-column justify-content-center align-items-center min-vh-100">
         <div className="border rounded p-4 shadow">
           <form className='px-4 py-3 d-flex flex-column align-items-center justify-content-center'>
@@ -34,6 +33,7 @@ export default function LoginPage() {
           </form>
         </div>
       </div>
+      <Footer />
     </>
   )
 }
