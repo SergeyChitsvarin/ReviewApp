@@ -13,6 +13,7 @@ export default function MainPage() {
 
   }
 
+  // User can look at the map of Canada and choose by province, what reviews they would like to see
   return (
           <>
           <Header />

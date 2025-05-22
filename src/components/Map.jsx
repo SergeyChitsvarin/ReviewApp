@@ -6,7 +6,7 @@ export default function CanadianMap()
 {
     const centre = [53.334242362310036, -107.33698365737052];
 
-
+    // Candadian map component using leaflet and maptiler to create the map
     return(
         <MapContainer 
                 center={centre} 
