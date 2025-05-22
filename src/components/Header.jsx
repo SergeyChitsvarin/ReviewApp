@@ -9,7 +9,7 @@ export default function Header() {
         navigate("/");
     }
 
-    // simple header showing logo and text allowing user to go to home page
+    // simple header component showing logo and text allowing user to go to home page
   return (
     <div className="bg-primary text-white p-3 text-center">
         <div className="container d-flex align-items-center justify-content-center">

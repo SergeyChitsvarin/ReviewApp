@@ -1,6 +1,6 @@
 export default function Footer() {
 
-    // simple footer at the bottom of screen displaying contact info
+    // simple footer component at the bottom of screen displaying contact information
   return (
     <div className="bg-primary text-white p-3 text-center align-items-bottom">
         <div className="container d-flex align-items-center justify-content-start">
