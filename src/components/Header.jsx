@@ -13,10 +13,10 @@ export default function Header() {
     // User redirected to main page
     function goToMainPage()
     {
-        navigate("/");
+        navigate("/browseReviews");
     }
 
-    // simple header component showing logo and text allowing user to go to home page
+    // Header component showing logo and text allowing user to go to home page
   return (
     <div className="navbar sticky-top bg-body-tertiary text-white text-center">
         <div className="container d-flex align-items-center justify-content-center">
