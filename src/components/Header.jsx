@@ -8,8 +8,10 @@ export default function Header() {
     function HandleLogOut()
     {
         navigate('/');
+        //**********log out logic */
 
     }
+
     // User redirected to main page
     function goToMainPage()
     {

@@ -3,7 +3,7 @@ export default function Footer() {
     // simple footer component at the bottom of screen displaying contact information
   return (
 
-    <div className="bg-body-tertiary text-white p-1 text-center navbar sticky-bottom">
+    <div className="bg-body-secondary text-white p-1 text-center navbar fixed-bottom">
       <div className="container d-flex align-items-center justify-content-start">
           <h1> Contact Us</h1>
           <ul className="list-unstyled p-2">

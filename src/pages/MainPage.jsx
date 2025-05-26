@@ -10,7 +10,16 @@ export default function MainPage() {
   return (
           <>
           <Header />
-          <CanadianMap/>
+
+          <div className="container border border-tertiary">
+            
+
+            <div class="container">
+              <h3 className=""> Please Select a Canadian Province to browse reviews.</h3>
+              <CanadianMap/>
+            </div>
+          </div>
+          
           <Footer />
           </>
   )
