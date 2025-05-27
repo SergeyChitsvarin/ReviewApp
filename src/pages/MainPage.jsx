@@ -8,7 +8,7 @@ export default function MainPage() {
   return (
           <>
           <Header />
-          <div className="container border border-tertiary rounded">
+          <div className="container border border-tertiary rounded mt-3 mb-3">
             <div class="container">
               <h3 className="text-center"> Please Select a Canadian city to browse reviews</h3>
               <CanadianMap/>
