@@ -1,5 +1,8 @@
 const express = require('express');
 const app = express();
+const cityRouter = require('./routes/cities');
+
+app.use("/cities", cityRouter)
 
 app.get("/api", (req, res) => {
     res.json({ users: ["userOne", "UserTwo", "userThree"] });
