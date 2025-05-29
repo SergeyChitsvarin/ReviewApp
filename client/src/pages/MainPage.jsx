@@ -4,12 +4,12 @@ import CanadianMap from "../components/Map";
 
 export default function MainPage() {
 
-  // User can look at the map of Canada and choose reviews based on the province.
+  // User can look at the map of Canada and choose reviews based on the City.
   return (
           <>
           <Header />
           <div className="container border border-tertiary rounded mt-3 mb-3">
-            <div class="container">
+            <div className="container">
               <h3 className="text-center"> Please Select a Canadian city to browse reviews</h3>
               <CanadianMap/>
             </div>

@@ -1,12 +1,14 @@
 import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { useNavigate } from 'react-router-dom';
 
 export default function CanadianMap() {
 
+  const navigate = useNavigate();
   const centre = [53.334242362310036, -107.33698365737052];
   const cityMarkers = [
     {
-      geocode: { lat: 51.067349, lng: -114.073226 }, // 52.143223, -106.656894
+      geocode: { lat: 51.067349, lng: -114.073226 },
       popUp: "Calgary"
     },
     {
@@ -67,8 +69,11 @@ export default function CanadianMap() {
       />
 
       {cityMarkers.map((marker, index) => (
-        <Marker key={index} position={[marker.geocode.lat, marker.geocode.lng]}>
-          <Popup>{marker.popUp}</Popup>
+        <Marker key={index} position={[
+          marker.geocode.lat, 
+          marker.geocode.lng ]}
+          eventHandlers = {{click: () => navigate(`/cities/${marker.popUp}`)}}
+          >
         </Marker>
       ))}
     </MapContainer>
