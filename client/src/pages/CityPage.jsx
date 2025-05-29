@@ -10,10 +10,14 @@ export default function CityPage() {
   return (
     <>
     <Header/>
-    
-    <div className="p-2">
-      <h1>This is {cityName}</h1>
-      {/* fetch <cities/cityName> city data*/}
+
+    <div className="container border border-tertiary rounded mt-3 mb-3">
+      <h3 className="text-center">Browsing reviews for {cityName}</h3>
+      <div className='container'>
+            <h1>Hi</h1>
+            {/* fetch <cities/cityName> city data*/}
+      </div>
+
     </div>
 
     <Footer/>
