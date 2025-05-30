@@ -18,7 +18,7 @@ export default function Header() {
         navigate("/browseReviews");
     }
 
-    // Header component showing logo and text allowing user to go to home page
+    // Header component showing logo and text allowing user to go to home page or log out
   return (
     <div className="navbar sticky-top bg-body-tertiary text-white text-center">
         <div className="container-fluid d-flex align-items-center ">
