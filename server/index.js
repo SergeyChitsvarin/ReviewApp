@@ -3,8 +3,10 @@ const app = express();
 const cityRouter = require('./routes/cities');
 const cors = require('cors');
 
-app.use("/cities", cityRouter);
 app.use(cors());
+
+app.use("/cities", cityRouter);
+
 
 
 app.listen(5000, () => {
