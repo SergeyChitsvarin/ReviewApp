@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 export default function CityPage() {
-  const { cityName } = useParams();
+  const {cityName} = useParams();
   const [cityData, setCityData] = useState(null);
 
   useEffect(() => {

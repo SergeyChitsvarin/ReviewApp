@@ -16,7 +16,7 @@ const cityData = {
 };
 
 router.get("/:cityName", (req, res) => {
-    const { cityName } = req.params;
+    const {cityName} = req.params;
     const data = cityData[cityName];
 
     res.json(data);
