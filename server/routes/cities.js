@@ -7,7 +7,7 @@ router.get("/:cityName", async (req, res) => {
 
   try {
     const db = await connectToDatabase();
-    const city = await db.collection("cities").findOne({ name: cityName });
+    const city = await db.collection("Cities").findOne({ name: cityName });
 
     if (!city) {
       return res.status(404).json({ message: "City not found" });
