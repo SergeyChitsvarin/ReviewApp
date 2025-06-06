@@ -1,25 +1,23 @@
-const express = require("express")
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
+const connectToDatabase = require("../connect.cjs");
 
-const cityData = {
-  Calgary: { name: "Calgary", message: "This is Calgary" },
-  Edmonton: { name: "Edmonton", message: "This is Edmonton" },
-  Vancouver: { name: "Vancouver", message: "This is Vancouver" },
-  Victoria: { name: "Victoria", message: "This is Victoria" },
-  Saskatoon: { name: "Saskatoon", message: "This is Saskatoon" },
-  Regina: { name: "Regina", message: "This is Regina" },
-  Winnipeg: { name: "Winnipeg", message: "This is Winnipeg" },
-  Toronto: { name: "Toronto", message: "This is Toronto" },
-  Ottawa: { name: "Ottawa", message: "This is Ottawa" },
-  Montreal: { name: "Montreal", message: "This is Montreal" },
-  Halifax: { name: "Halifax", message: "This is Halifax" }
-};
+router.get("/:cityName", async (req, res) => {
+  const { cityName } = req.params;
 
-router.get("/:cityName", (req, res) => {
-    const {cityName} = req.params;
-    const data = cityData[cityName];
+  try {
+    const db = await connectToDatabase();
+    const city = await db.collection("cities").findOne({ name: cityName });
 
-    res.json(data);
+    if (!city) {
+      return res.status(404).json({ message: "City not found" });
+    }
+
+    res.json(city);
+  } catch (e) {
+    console.error("Error fetching city:", e.message);
+    res.status(500).json({ message: "Server error fetching city data" });
+  }
 });
 
-module.exports = router
+module.exports = router;
