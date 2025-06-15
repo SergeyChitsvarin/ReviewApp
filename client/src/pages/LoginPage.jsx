@@ -5,7 +5,7 @@ export default function LoginPage() {
   const navigate = useNavigate()
 
   const handleLogInAttempt = () => {
-    //if correct user credentials go to browse log in page
+    //if correct user credentials/ login as guest is checked go to browse log in page
     navigate('/browseReviews')
 
   }
@@ -26,6 +26,10 @@ export default function LoginPage() {
             <div className="mb-3">
               <label htmlFor="formPass" className="form-label px-1">Password:  </label>
               <input type="password" placeholder='Password' id="formPass" />
+            </div>
+            <div className='mb-3'>
+              <label htmlFor="formGuestLogIn" className='form-label px-1'> log-in as guest: </label>
+              <input type="checkbox" id='formGuestLogIn'/>
             </div>
             <button className="btn btn-primary m-3" onClick={handleLogInAttempt}>
               Log In
