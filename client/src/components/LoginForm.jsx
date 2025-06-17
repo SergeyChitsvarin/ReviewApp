@@ -27,9 +27,12 @@ export default function LoginForm(){
               <label htmlFor="formPass" className="form-label px-1">Password:  </label>
               <input type="password" placeholder='Password' id="formPass" />
             </div>
-            <div className='mb-3'>
+            <div>
               <label htmlFor="formGuestLogIn" className='form-label px-1'> log-in as guest: </label>
               <input type="checkbox" id='formGuestLogIn'/>
+
+              <div className="vr mx-3"></div>
+
               <label htmlFor="createAcct" className='form-label px-1'> Create an Account</label>
               <Link to="/createAccount" id="createAcct">Here</Link>
             </div>
