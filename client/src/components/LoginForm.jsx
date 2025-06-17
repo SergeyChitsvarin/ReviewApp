@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom'
 import React from 'react'
 
@@ -29,6 +30,8 @@ export default function LoginForm(){
             <div className='mb-3'>
               <label htmlFor="formGuestLogIn" className='form-label px-1'> log-in as guest: </label>
               <input type="checkbox" id='formGuestLogIn'/>
+              <label htmlFor="createAcct" className='form-label px-1'> Create an Account</label>
+              <Link to="/createAccount" id="createAcct">Here</Link>
             </div>
             <button className="btn btn-primary m-3" onClick={handleLogInAttempt}>
               Log In
