@@ -1,15 +1,54 @@
 import React from 'react'
 import Footer from '../components/Footer'
+import { useNavigate } from 'react-router-dom'
+import { useState } from 'react';
 
 
 
 export default function CreateAccountPage() {
     // Page to create an account and update the database accourdingly
 
-    function handleCreateAccount(){
-        //function creates an account in the DB and send user to the login page if all entered information is correct
+    const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        email: '',
+        firstName: '',
+        lastName: '',
+        password: ''
+    });
+    const [error, setError] = useState();
 
-    }
+    //function creates an account in the DB and send user to the login page if all entered information is correct
+    function handleCreateAccount() {
+        const { email, firstName, lastName, password } = formData;
+
+        if (!email || !firstName || !lastName || !password) {
+        setError('All fields are required.');
+        return;
+        }
+
+        if (firstName.length > 20) {
+            setError('Your first name has too many characters')
+        }
+
+        if (lastName.length > 50) {
+            setError('Your Last name has too many characters')
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+        setError('Please enter a valid email address.');
+        return;
+        }
+
+        if (password.length < 6) {
+        setError('Password must be at least 6 characters long.');
+        return;
+        }
+        setError('');
+        // Send data to DB
+
+        navigate('/');
+  }
 
   return (
   <>
