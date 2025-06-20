@@ -13,6 +13,11 @@ export default function CityPage() {
       .then(data => setCityData(data));
   }, [cityName]);
 
+  function handleCreateReview(){
+    //update city review in the DB
+
+  }
+
   return (
     <>
       <Header />
@@ -21,7 +26,10 @@ export default function CityPage() {
         <div className="container">
           {cityData ? (
             <>
-              <p><strong>Description:</strong> {cityData.description}</p>
+              <h3><strong>{cityData.description} </strong></h3>
+              <button type="button" className="btn btn-primary " onClick={handleCreateReview}>
+                Leave a Review for {cityName}
+              </button>
 
               <h5 className="mt-4">Reviews:</h5>
               {cityData.reviews && cityData.reviews.length > 0 ? (
@@ -32,13 +40,9 @@ export default function CityPage() {
                     </li>
                   ))}
                 </ul>
-              ) : (
-                <p>No reviews yet for this city.</p>
-              )}
+              ) : (<p>{cityName} does not have any reviews yet</p>)}
             </>
-          ) : (
-            <p>Loading city data...</p>
-          )}
+          ) : (<p>loading reviews...</p>)}
         </div>
       </div>
       <Footer />
