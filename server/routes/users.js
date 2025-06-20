@@ -7,7 +7,7 @@ router.post('/register', async (req, res) => {
 
   try {
     const db = await connectToDatabase();
-    const usersCollection = db.collection('users');
+    const usersCollection = db.collection('Users');
 
     const existingUser = await usersCollection.findOne({ email });
     if (existingUser) {

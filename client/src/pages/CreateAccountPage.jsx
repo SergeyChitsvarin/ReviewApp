@@ -46,7 +46,7 @@ export default function CreateAccountPage() {
         }
         // Clear error message
         setError('');
-        // Fetching 
+        
         fetch('http://localhost:5000/users/register', { 
             method: 'POST', headers: {'Content-Type': 'application/json',}, body: JSON.stringify({ email, firstName, lastName, password })
 
@@ -56,7 +56,7 @@ export default function CreateAccountPage() {
                 throw new Error(err.error || 'Failed to register');
             });
             }
-            
+
             return res.json();
         })
         .then(() => {
