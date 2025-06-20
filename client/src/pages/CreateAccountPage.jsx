@@ -27,7 +27,7 @@ export default function CreateAccountPage() {
         }
 
         if (firstName.length > 20) {
-            setError('Your first name has too many characters')
+            setError('Your First name has too many characters')
         }
 
         if (lastName.length > 50) {
@@ -40,8 +40,8 @@ export default function CreateAccountPage() {
         return;
         }
 
-        if (password.length < 6) {
-        setError('Password must be at least 6 characters long.');
+        if (password.length < 8) {
+        setError('Password must be at least 8 characters long.');
         return;
         }
         setError('');
