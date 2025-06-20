@@ -44,8 +44,29 @@ export default function CreateAccountPage() {
         setError('Password must be at least 8 characters long.');
         return;
         }
+        // Clear error message
         setError('');
-        // Send data to DB
+        // Fetching 
+        fetch('http://localhost:5000/users/register', { 
+            method: 'POST', headers: {'Content-Type': 'application/json',}, body: JSON.stringify({ email, firstName, lastName, password })
+
+        }).then(res => {
+            if (!res.ok) {
+                return res.json().then(err => {
+                throw new Error(err.error || 'Failed to register');
+            });
+            }
+            
+            return res.json();
+        })
+        .then(() => {
+            navigate('/');
+
+        })
+        .catch(err => {
+        setError(err.message);
+
+        });
 
         navigate('/');
   }
