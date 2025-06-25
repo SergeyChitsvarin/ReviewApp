@@ -24,23 +24,6 @@ router.post('/register', async (req, res) => {
   }
 });
 
-router.get("/authenticate", async (req, res) =>{
-    const { email, firstName, lastName, password } = req.body;
 
-    try {
-        const db =  await connectToDatabase();
-        const userCollection = db.collection('Users');
-
-        const existingUser = await usersCollection.findOne({ email, password });
-        if (existingUser) {
-            // authenticate
-    }
-
-
-
-    } catch (error) {
-        
-    }
-});
 
 module.exports = router;
