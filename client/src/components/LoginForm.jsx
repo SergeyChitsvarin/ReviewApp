@@ -8,10 +8,16 @@ export default function LoginForm(){
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [guestLogin, setGuestLogin] = useState(false);
 
     const navigate = useNavigate()
 
     const handleLogin = async (e) => {
+
+      if(guestLogin){
+        navigate('/browseReviews');
+      }
+
       e.preventDefault();
       try {
         const res = await axios.post('http://localhost:5000/auth/login', { email, password });
@@ -39,13 +45,16 @@ export default function LoginForm(){
             </div>
             <div>
               <label htmlFor="formGuestLogIn" className='form-label px-1'> log-in as guest: </label>
-              <input type="checkbox" id='formGuestLogIn'/>
+              <input type="checkbox" id='formGuestLogIn' checked = {guestLogin} onChange={(e) => setGuestLogin(e.target.checked)}/>
 
               <div className="vr mx-3"></div>
 
               <label htmlFor="createAcct" className='form-label px-1'> Create an Account</label>
               <Link to="/createAccount" id="createAcct">Here</Link>
             </div>
+
+            {error && <div className="alert alert-danger mt-2">{error}</div>}
+
             <button className="btn btn-primary m-3" type='submit'>
               Log In
             </button>
