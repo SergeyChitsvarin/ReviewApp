@@ -37,11 +37,11 @@ export default function LoginForm(){
             </div>
             <div className="mb-3">
               <label htmlFor="formUser" className="form-label px-1">Username: </label>
-              <input type="email" placeholder='YourEmail@Mail.com' id="formUser" onChange={(e) => setEmail(e.target.value)} required/>
+              <input type="email" placeholder='YourEmail@Mail.com' id="formUser" onChange={(e) => setEmail(e.target.value)}/>
             </div>
             <div className="mb-3">
               <label htmlFor="formPass" className="form-label px-1">Password:  </label>
-              <input type="password" placeholder='Password' id="formPass" onChange={(e) => setPassword(e.target.value)} required/>
+              <input type="password" placeholder='Password' id="formPass" onChange={(e) => setPassword(e.target.value)}/>
             </div>
             <div>
               <label htmlFor="formGuestLogIn" className='form-label px-1'> log-in as guest: </label>
