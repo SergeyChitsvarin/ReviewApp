@@ -4,9 +4,11 @@ const bcrypt = require('bcryptjs');
 const router = express.Router();
 const connectToDatabase = require('../connect.cjs');
 
+require("dotenv").config();
+
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
-  
+
   const db = await connectToDatabase();
   const usersCollection = db.collection('Users');
 

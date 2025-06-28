@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcryptjs');
 const router = express.Router();
 const connectToDatabase = require('../connect.cjs');
 
@@ -14,7 +15,9 @@ router.post('/register', async (req, res) => {
       return res.status(400).json({ error: 'User already exists' });
     }
 
-    const newUser = { email, firstName, lastName, password };
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = { email, firstName, lastName, password: hashedPassword };
     await usersCollection.insertOne(newUser);
 
     res.status(201).json({ message: 'User created successfully' });
