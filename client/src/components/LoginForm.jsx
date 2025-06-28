@@ -35,8 +35,11 @@ export default function LoginForm(){
             <div>
               <h1 className="mb-4 text-center">Login</h1>
             </div>
+
+            {error && <div className="alert alert-danger mt-2">{error}</div>}
+
             <div className="mb-3">
-              <label htmlFor="formUser" className="form-label px-1">Username: </label>
+              <label htmlFor="formUser" className="form-label px-1">Email: </label>
               <input type="email" placeholder='YourEmail@Mail.com' id="formUser" onChange={(e) => setEmail(e.target.value)}/>
             </div>
             <div className="mb-3">
@@ -52,8 +55,6 @@ export default function LoginForm(){
               <label htmlFor="createAcct" className='form-label px-1'> Create an Account</label>
               <Link to="/createAccount" id="createAcct">Here</Link>
             </div>
-
-            {error && <div className="alert alert-danger mt-2">{error}</div>}
 
             <button className="btn btn-primary m-3" type='submit'>
               Log In
