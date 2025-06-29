@@ -1,16 +1,49 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 export default function Header() {
 
     const navigate = useNavigate();
+    const [userName, setUserName] = useState('');
+
+    //displaying users name and a welcome message if the user is logged
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        const isGuest = localStorage.getItem('guest') === 'true';
+
+        if (token && !isGuest) {
+        // Fetch user info
+        axios.get('http://localhost:5000/users/me', {
+            headers: {
+            Authorization: `Bearer ${token}`,
+            }
+        }).then(res => {
+            setUserName(res.data.firstName);
+        }).catch(() => {
+            setUserName(' User');
+        });
+        }
+    }, []);
+
 
     // user redirected to login page and logged out of account
-    function HandleLogOut()
-    {
-        navigate('/');
-        //**********log out logic */
+    const handleLogOut = () => {
+        const token = localStorage.getItem('token');
+        const isGuest = localStorage.getItem('guest') === 'true';
 
-    }
+        if (isGuest || !token) {
+        // If guest user (not logged in)
+        localStorage.removeItem('guest');
+        navigate('/');
+        } 
+        else {
+        // If logged-in user
+        localStorage.removeItem('token');
+        localStorage.removeItem('guest');
+        navigate('/');
+        }
+    };
 
     // User redirected to main page
     function goToMainPage()
@@ -30,7 +63,10 @@ export default function Header() {
                 onClick={goToMainPage}
             />
             <h1 className="m-0 justify-content-center">Review Guru</h1>
-            <button onClick={HandleLogOut} className="justify-content-right btn btn-secondary">Log Out</button>
+
+            {userName && <span>Welcome, {userName}!</span>}
+
+            <button onClick={handleLogOut} className="justify-content-right btn btn-secondary">Log Out</button>
         </div>
     </div>
   );
