@@ -7,7 +7,7 @@ export default function Header() {
     const navigate = useNavigate();
     const [userName, setUserName] = useState('');
 
-    //displaying users name and a welcome message if the user is logged
+    //displaying users name if the user is logged in
     useEffect(() => {
         const token = localStorage.getItem('token');
         const isGuest = localStorage.getItem('guest') === 'true';
@@ -21,7 +21,8 @@ export default function Header() {
         }).then(res => {
             setUserName(res.data.firstName);
         }).catch(() => {
-            setUserName(' User');
+            /* ********************************************************************************************************** */
+            setUserName('Catch Block');
         });
         }
     }, []);
@@ -63,7 +64,11 @@ export default function Header() {
                 <h1 className="h4 m-0">Review Guru</h1>
             </div>
                 <div className="d-flex align-items-center">
-                    <p className="m-3">Welcome, {userName}!</p>
+
+                    {userName && (
+                        <span className="m-3">
+                        Welcome, {userName}!
+                    </span>)}
 
                     <button onClick={handleLogOut} className="btn btn-secondary">
                     Log Out
