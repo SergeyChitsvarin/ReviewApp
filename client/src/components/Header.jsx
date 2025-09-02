@@ -21,8 +21,7 @@ export default function Header() {
         }).then(res => {
             setUserName(res.data.firstName);
         }).catch(() => {
-            /* ********************************************************************************************************** */
-            setUserName('Catch Block');
+            setUserName('NO USER NAME');
         });
         }
     }, []);

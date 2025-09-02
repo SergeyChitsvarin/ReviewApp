@@ -51,7 +51,7 @@ export default function CityPage() {
                 <ul className="list-group">
                   {cityData.reviews.map((review, index) => (
                     <li key={index} className="list-group-item">
-                      {review}
+                      <strong>{review.name}</strong>: {review.text}
                     </li>
                   ))}
                 </ul>

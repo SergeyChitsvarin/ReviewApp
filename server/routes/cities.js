@@ -27,25 +27,30 @@ router.post('/:cityName/reviews', async (req, res) => {
   try {
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     const { cityName } = req.params;
-    const { review } = req.body;
+    const { reviewText } = req.body;
 
     const db = await connectToDatabase();
     const citiesCollection = db.collection('Cities');
 
     const result = await citiesCollection.updateOne(
       { name: cityName },
-      { $push: { reviews: review } }
+      {
+        $push: {
+          reviews: {
+            name: decoded.firstName,
+            text: reviewText
+          }
+        }
+      }
     );
-
     if (result.modifiedCount === 0) {
-      return res.status(404).json({ message: ' error creating review' });
+      return res.status(404).json({ message: 'City not found or review not added' });
     }
-
     res.status(200).json({ message: 'Review added successfully' });
-
-  } catch (err) {
-    res.status(403).json({ message: 'Invalid or expired token' });
-  }
+    } catch (err) {
+      console.error(err);
+      res.status(403).json({ message: 'Invalid or expired token' });
+    }
 });
 
 module.exports = router;

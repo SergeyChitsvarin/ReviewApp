@@ -11,12 +11,14 @@ export default function ReviewForm({ cityName, onSubmit }) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`
       },
-      body: JSON.stringify({ review: reviewText })
+      body: JSON.stringify({ reviewText })
     });
 
     if (res.ok) {
+      
+      console.log("Review submitted!");
       setReviewText('');
-      onSubmit(); // refetch or update UI
+      onSubmit(); // update UI
     }
   };
 
