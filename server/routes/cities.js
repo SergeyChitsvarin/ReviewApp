@@ -20,4 +20,32 @@ router.get("/:cityName", async (req, res) => {
   }
 });
 
+router.post('/:cityName/reviews', async (req, res) => {
+  const token = req.headers.authorization?.split(' ')[1];
+  if (!token) return res.status(401).json({ message: 'Missing token' });
+
+  try {
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const { cityName } = req.params;
+    const { review } = req.body;
+
+    const db = await connectToDatabase();
+    const citiesCollection = db.collection('Cities');
+
+    const result = await citiesCollection.updateOne(
+      { name: cityName },
+      { $push: { reviews: review } }
+    );
+
+    if (result.modifiedCount === 0) {
+      return res.status(404).json({ message: ' error creating review' });
+    }
+
+    res.status(200).json({ message: 'Review added successfully' });
+
+  } catch (err) {
+    res.status(403).json({ message: 'Invalid or expired token' });
+  }
+});
+
 module.exports = router;

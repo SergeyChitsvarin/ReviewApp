@@ -1,11 +1,14 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+
 
 export default function CityPage() {
   const { cityName } = useParams();
   const [cityData, setCityData] = useState(null);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`http://localhost:5000/cities/${cityName}`)
@@ -14,8 +17,13 @@ export default function CityPage() {
   }, [cityName]);
 
   function handleCreateReview(){
-    //update city review in the DB
-
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/');
+    } 
+    else {
+      setShowReviewForm(true);
+    }
   }
 
   return (
@@ -30,6 +38,13 @@ export default function CityPage() {
               <button type="button" className="btn btn-primary " onClick={handleCreateReview}>
                 Leave a Review for {cityName}
               </button>
+
+              {showReviewForm && (
+                <ReviewForm cityName={cityName} onSubmit={() => {
+                  setShowReviewForm(false);
+                  // refresh reviews
+                }} />
+              )}
 
               <h5 className="mt-4">Reviews:</h5>
               {cityData.reviews && cityData.reviews.length > 0 ? (
