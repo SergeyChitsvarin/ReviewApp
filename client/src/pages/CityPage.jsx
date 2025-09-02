@@ -1,8 +1,8 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import ReviewForm from '../components/ReviewForm';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-
 
 export default function CityPage() {
   const { cityName } = useParams();
@@ -10,18 +10,22 @@ export default function CityPage() {
   const [showReviewForm, setShowReviewForm] = useState(false);
   const navigate = useNavigate();
 
+  // function to fetch city and reviews
+  const fetchCityData = async () => {
+    const res = await fetch(`http://localhost:5000/cities/${cityName}`);
+    const data = await res.json();
+    setCityData(data);
+  };
+
   useEffect(() => {
-    fetch(`http://localhost:5000/cities/${cityName}`)
-      .then(res => res.json())
-      .then(data => setCityData(data));
+    fetchCityData();
   }, [cityName]);
 
-  function handleCreateReview(){
+  function handleCreateReview() {
     const token = localStorage.getItem('token');
     if (!token) {
-      navigate('/');
-    } 
-    else {
+      navigate('/'); //to login page
+    } else {
       setShowReviewForm(true);
     }
   }
@@ -34,16 +38,23 @@ export default function CityPage() {
         <div className="container">
           {cityData ? (
             <>
-              <h3><strong>{cityData.description} </strong></h3>
-              <button type="button" className="btn btn-primary " onClick={handleCreateReview}>
+              <h3><strong>{cityData.description}</strong></h3>
+              <button
+                type="button"
+                className="btn btn-primary"
+                onClick={handleCreateReview}
+              >
                 Leave a Review for {cityName}
               </button>
 
               {showReviewForm && (
-                <ReviewForm cityName={cityName} onSubmit={() => {
-                  setShowReviewForm(false);
-                  // refresh reviews
-                }} />
+                <ReviewForm
+                  cityName={cityName}
+                  onSubmit={() => {
+                    setShowReviewForm(false);
+                    fetchCityData();
+                  }}
+                />
               )}
 
               <h5 className="mt-4">Reviews:</h5>
@@ -55,9 +66,13 @@ export default function CityPage() {
                     </li>
                   ))}
                 </ul>
-              ) : (<p>{cityName} does not have any reviews yet</p>)}
+              ) : (
+                <p>{cityName} does not have any reviews yet</p>
+              )}
             </>
-          ) : (<p>loading reviews...</p>)}
+          ) : (
+            <p>Loading reviews...</p>
+          )}
         </div>
       </div>
       <Footer />
