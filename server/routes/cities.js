@@ -1,4 +1,5 @@
 const express = require("express");
+const jwt = require("jsonwebtoken");
 const router = express.Router();
 const connectToDatabase = require("../connect.cjs");
 
@@ -7,7 +8,7 @@ router.get("/:cityName", async (req, res) => {
 
   try {
     const db = await connectToDatabase();
-    const city = await db.collection("Cities").findOne({ name: cityName});
+    const city = await db.collection("Cities").findOne({ name: cityName });
 
     if (!city) {
       return res.status(404).json({ message: "City not found" });
@@ -20,17 +21,21 @@ router.get("/:cityName", async (req, res) => {
   }
 });
 
-router.post('/:cityName/reviews', async (req, res) => {
-  const token = req.headers.authorization?.split(' ')[1];
-  if (!token) return res.status(401).json({ message: 'Missing token' });
+router.post("/:cityName/reviews", async (req, res) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) return res.status(401).json({ message: "Missing token" });
 
   try {
     const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
     const { cityName } = req.params;
-    const { reviewText } = req.body;
+    const { text } = req.body;
+
+    if (!text) {
+      return res.status(400).json({ message: "Review text is required" });
+    }
 
     const db = await connectToDatabase();
-    const citiesCollection = db.collection('Cities');
+    const citiesCollection = db.collection("Cities");
 
     const result = await citiesCollection.updateOne(
       { name: cityName },
@@ -38,19 +43,23 @@ router.post('/:cityName/reviews', async (req, res) => {
         $push: {
           reviews: {
             name: decoded.firstName,
-            text: reviewText
-          }
-        }
+            text,
+          },
+        },
       }
     );
+
     if (result.modifiedCount === 0) {
-      return res.status(404).json({ message: 'City not found or review not added' });
+      return res
+        .status(404)
+        .json({ message: "City not found or review not added" });
     }
-    res.status(200).json({ message: 'Review added successfully' });
-    } catch (err) {
-      console.error(err);
-      res.status(403).json({ message: 'Invalid or expired token' });
-    }
+
+    res.status(200).json({ message: "Review added successfully" });
+  } catch (err) {
+    console.error("Error adding review:", err);
+    res.status(403).json({ message: "Invalid or expired token" });
+  }
 });
 
 module.exports = router;
