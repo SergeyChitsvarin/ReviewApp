@@ -19,7 +19,7 @@ router.post('/login', async (req, res) => {
   if (!validPass) return res.status(401).json({ message: "Invalid credentials" });
 
   const accessToken = jwt.sign(
-    { userId: foundUser._id, email: foundUser.email },
+    { userId: foundUser._id, email: foundUser.email, firstName: foundUser.firstName },
     process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: '15m' }
   );
